@@ -19,11 +19,12 @@ public class User extends AbstractEntity {
 	private String username;
 	protected String pwHash;
 	protected static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	protected double mileageAllowance;
 
 	//no arg constructor so Hibernate will work
 	public User(){}
 
-	public User (String firstName, String lastName, String username, String password){
+	public User (String firstName, String lastName, String username, String password, double mileageAllowance){
 
 		super();
 
@@ -31,6 +32,7 @@ public class User extends AbstractEntity {
 		this.lastName = lastName;
 		this.username = username;
 		this.pwHash = hashPassword(password); 
+		this.mileageAllowance = mileageAllowance;
 	}
 
 	@NotNull
@@ -72,6 +74,15 @@ public class User extends AbstractEntity {
 	@SuppressWarnings("unused")
 	private void setPwHas(String pwHash){
 		this.pwHash = pwHash;
+	}
+	
+	@Column(name = "mileageAllowance")
+	public double getMileageAllowance(){
+		return mileageAllowance;
+	}
+	
+	protected void setMileageAllowance(double mileageAllowance){
+		this.mileageAllowance = mileageAllowance;
 	}
 	
 	//hash the password
