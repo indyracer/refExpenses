@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="template :: dochead"></head>
+
+<body>
+
+	<div th:replace="template :: expense-nav"></div>
+<h1>Mileage Input</h1>
+<!-- do form to add mileage -->
+	<form method="post">
+		<table>
+			<tr>
+				<td><span class="error" th:text="${missing_field_error}"></span></td>
+			</tr>
+			
+			<tr>
+				<td><label for="date">Date</label></td>
+				<td>
+					<input name="date" type="text" th:value="${date}"></input>
+					<span class="error" th:text="${date_error}"></span>
+				</td>
+			</tr>
+			
+			<tr>
+				<td><label for="from">From</label></td>
+				<td>
+					<input name="from" type="text" th:value="${from}"></input>
+					<span class="error" th:text="${from_error}"></span>
+				</td>
+			</tr>
+			
+			<tr>
+				<td><label for="to">To</label></td>
+				<td>
+					<input name="to" type="text" th:value="${to}"></input>
+					<span class="error" th:text="${to_error}"></span>
+				</td>
+			</tr>
+			
+			<tr>
+				<td><label for="Miles">Miles</label></td>
+				<td>
+					<input name="miles" type="text" th:value="${miles}"></input>
+					<span class="miles" th:text="${miles_error}"></span>
+				</td>
+			</tr>
+		</table>
+		<button type="submit">Submit</button>
+	</form>
+</body>
+
+</html>

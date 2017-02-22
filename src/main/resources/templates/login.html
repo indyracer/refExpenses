@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="template :: dochead"></head>
+
+<body>
+	<div th:replace="template :: main-nav"></div>
+
+<h1>Referee Expense Login</h1>
+
+	<form method="post">
+		<table>
+			<tr>
+				<td><span class="error" th:text="${missing_field_error}"></span></td>
+			</tr>
+			
+			<tr>
+				<td><label for="username">Username</label></td>
+				<td>
+					<input name="username" type="text" th:value="${username}"></input>
+					<span class="error" th:text="${username_error}"></span>
+				</td>
+			</tr>
+			
+			<tr>
+				<td><label for="password">Password</label></td>
+				<td>
+					<input name="password" type="password" th:value="${password}"></input>
+					<span class="error" th:text="${password_error}"></span>
+				</td>
+			</tr>		
+		</table>
+		
+		<button type="submit">Submit</button>
+	
+	</form>
+
+
+</body>
+
+</html>

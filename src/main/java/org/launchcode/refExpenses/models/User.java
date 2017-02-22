@@ -72,7 +72,7 @@ public class User extends AbstractEntity {
 	}
 	
 	@SuppressWarnings("unused")
-	private void setPwHas(String pwHash){
+	private void setPwHash(String pwHash){
 		this.pwHash = pwHash;
 	}
 	

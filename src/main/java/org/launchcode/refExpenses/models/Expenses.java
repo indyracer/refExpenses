@@ -1,7 +1,5 @@
 package org.launchcode.refExpenses.models;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -16,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class Expenses extends AbstractEntity{
 	
 	private User user;
-	private Date date;
+	private String date;
 	private String expenseType;
 	private double miles; //for mileage only
 	private double amount;
@@ -26,7 +24,7 @@ public class Expenses extends AbstractEntity{
 	//no arg for hibernate
 	public Expenses(){}
 	
-	public Expenses(User user, Date date, String expenseType, double miles, double amount, String vendor, boolean haveReceipt){
+	public Expenses(User user, String date, String expenseType, double miles, double amount, String vendor, boolean haveReceipt){
 		
 		super();
 		
@@ -50,11 +48,11 @@ public class Expenses extends AbstractEntity{
 	
 	@NotNull
 	@Column(name = "date")
-	public Date getDate(){
+	public String getDate(){
 		return date;
 	}
 	
-	public void setDate(Date date){
+	public void setDate(String date){
 		this.date = date;
 	}
 	
