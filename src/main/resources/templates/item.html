@@ -4,6 +4,58 @@
 
 <h1>Add an Expense</h1>
 
-<!-- do form to add an expense here -->
+<form method="post">
+	<table>
+		<tr>
+			<td><span class="error" th:text="${missing_field_error}"></span></td>
+		</tr>
+		
+		<tr>
+			<td><label for="date">Date</label></td>
+			<td>
+				<input name="date" type="text" th:value="${date}"></input>
+				<span class="error" th:text="${date_error}"></span>
+			</td>
+		</tr>
+		
+		<tr>
+			<td><label for="expenseType">Expense Type (i.e. equipment, fee, meals)</label></td>
+			<td>
+				<input name="expenseType" type="text" th:value="${expenseType}"></input>
+				<span class="error" th:text="${expenseType_error}"></span>
+			</td>
+		</tr>
+		
+		<tr>
+			<td><label for="vendor">Vendor</label></td>
+			<td>
+				<input name="vendor" type="text" th:value="${vendor}"></input>
+				<span class="error" th:text="${vendor_error}"></span>
+			</td>
+		</tr>
+				
+		<tr>
+			<td><label for="amount">Amount</label></td>
+			<td>
+				<input name="amount" type="text" th:value="${amount}"></input>
+				<span class="error" th:text="${amount_error}"></span>
+			</td>
+		</tr>
+		
+		<tr>
+			<td><label for="haveReceipt">Do you have a Receipt?</label></td>
+			<td>
+				<input name="haveReceipt" type="radio" th:value="true">Yes</input>
+				<input name="haveReceipt" type="radio" th:value="false">No</input>
+				<span class="error" th:text="${haveReceipt_error}"></span>
+			</td>
+		</tr>
+			
+	</table>
+	
+	<button type="submit">Submit</button>
+
+
+</form>
 
 </html>
