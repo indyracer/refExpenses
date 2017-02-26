@@ -79,7 +79,7 @@ public class Expenses extends AbstractEntity{
 	@NotNull
 	@Column(name = "amount")
 	public double getAmount(){
-		if(expenseType == "Mileage"){
+		if(expenseType == "Mileage" || expenseType == "mileage"){
 			return miles * user.getMileageAllowance();
 		}
 		

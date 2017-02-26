@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="template :: dochead"></head>
+
+<body>
+	<div th:replace="template :: expense-nav"></div>
+	
+	<h1>Expense Reports</h1>
+	
+	<p th:text="'Current total expenses:  $' + ${totalExpenses}"></p>
+	
+	<!-- Add links to pages for other reporting metrics, i.e. by expense type, by month -->
+	
+	<p><a href="byexpensetype">Totals by Expense Type</a></p>
+	<p><a href="bymonth">Totals by Month</a></p>
+
+
+</body>
+</html>

@@ -14,8 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Table(name = "user")
 public class User extends AbstractEntity {
 
-	private String firstName;
-	private String lastName;
+	protected String firstName;
+	protected String lastName;
 	private String username;
 	protected String pwHash;
 	protected static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: dochead"></head>
+
+<body>
+	<div th:replace="template :: expense-nav"></div>
+	
+<h1>Summary by Expense Type</h1>
+
+<p th:text="'Equipment:  $' + ${equipmentTotal}"></p>
+<p th:text="'Meals:  $' + ${mealsTotal}"></p>
+<p th:text="'Fees/Membership Dues:  $' + ${feesTotal}"></p>
+<p th:text="'Travel:  $' + ${travelTotal}"></p>
+<p th:text="'Mileage:  $' + ${mileageTotal}"></p> 
+
+
+
+</body>
+
+
+</html>

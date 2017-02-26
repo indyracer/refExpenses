@@ -21,7 +21,10 @@
 		<tr>
 			<td><label for="expenseType">Expense Type (i.e. equipment, fee, meals)</label></td>
 			<td>
-				<input name="expenseType" type="text" th:value="${expenseType}"></input>
+				<input name="expenseType" type="radio" th:value="equipment">Equipment</input>
+				<input name="expenseType" type="radio" th:value="meals">Meals</input>
+				<input name="expenseType" type="radio" th:value="fees">Fees (i.e. membership fees/dues)</input>
+				<input name="expenseType" type="radio" th:value="travel">travel</input>
 				<span class="error" th:text="${expenseType_error}"></span>
 			</td>
 		</tr>

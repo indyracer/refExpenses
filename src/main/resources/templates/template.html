@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
 <head th:fragment="dochead">
-	<link th:href="@{/css/styles.css}" rel="stylesheet" />
+	<link th:href="@{/styles.css}" rel="stylesheet" />
 	<title>Referee Expense Tracker</title>
 </head>
 
 <body>
 
-<nav th:fragment="main-nav">
-	<ul id="main-nav">
-		<li><a href="/">Home</a></li>
-		<li><a href="/logout">Logout</a></li>
-	</ul>
-</nav>
-
-<!-- insert other nav fragments here once layout is complete -->
-
 <nav th:fragment="expense-nav">
 	<ul id="expense-nav">
+		<li><a href="/expensehome">Home</a></li>
 		<li><a href="/mileage">Mileage</a></li>
 		<li><a href="/item">Items</a></li>
-		<li><a href="/reporting>">Reporting</a></li>
+		<li><a href="/reporting">Reporting</a></li>
 		<li><a href="/logout">Logout</a></li>	
 	</ul>
 
