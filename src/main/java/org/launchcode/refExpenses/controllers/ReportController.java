@@ -1,6 +1,5 @@
 package org.launchcode.refExpenses.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,11 +28,12 @@ public class ReportController extends AbstractController {
 		//pull in the user that is logged in
 		
 		//gets the user that is logged in
-		User userInSession = userInSession(request);
+		User userInSession = getUserFromSession(request.getSession());
+		int userUid = userInSession.getUid();
 				
 			
 		//pulls up all the expenses for the logged in user
-		List<Expenses> expenses = expensesDao.findByUser(userInSession);
+		List<Expenses> expenses = expensesDao.findByUserUid(userUid);
 		
 		//calculates the total expenses
 		double totalExpenses = 0;
@@ -44,7 +44,7 @@ public class ReportController extends AbstractController {
 			totalExpenses = totalExpenses + temp.getAmount();
 		}
 		
-		//format so expense is to 2 deceimal places
+		//format so expense is to 2 decimal places
 		totalExpenses = Math.round(totalExpenses * 100) / 100.00;
 		
 		model.addAttribute("totalExpenses", totalExpenses);
@@ -56,10 +56,11 @@ public class ReportController extends AbstractController {
 	@RequestMapping(value = "/byexpensetype", method = RequestMethod.GET)
 	public String byExpenseType(HttpServletRequest request, Model model){
 		//pull in logged in user
-		User userInSession = userInSession(request);
+		User userInSession = getUserFromSession(request.getSession());
+		int userUid = userInSession.getUid();
 		
 		//pull in logged users expenses
-		List <Expenses> expenses = expensesDao.findByUser(userInSession);
+		List <Expenses> expenses = expensesDao.findByUserUid(userUid);
 		
 		//pull each expense and total up by expenseType:  equipment, meals, fees, travel, mileage
 		double equipmentTotal = 0;
@@ -75,23 +76,23 @@ public class ReportController extends AbstractController {
 		for(int i = 0; i < expensesSize; i++){
 			temp = expenses.get(i);
 			
-			if(temp.getExpenseType() == "equipment"){
+			if(temp.getExpenseType().equals("equipment")){
 				equipmentTotal = equipmentTotal + temp.getAmount();
 			}
 			
-			if(temp.getExpenseType() == "meals"){
+			if(temp.getExpenseType().equals("meals")){
 				mealsTotal = mealsTotal + temp.getAmount();
 			}
 			
-			if(temp.getExpenseType() == "fees"){
+			if(temp.getExpenseType().equals("fees")){
 				feesTotal = feesTotal + temp.getAmount();
 			}
 			
-			if(temp.getExpenseType() == "travel"){
+			if(temp.getExpenseType().equals("travel")){
 				travelTotal = travelTotal + temp.getAmount();
 			}
 			
-			if(temp.getExpenseType() == "mileage"){
+			if(temp.getExpenseType().equals("mileage")){
 				mileageTotal = mileageTotal + temp.getAmount();
 			}
 		}
