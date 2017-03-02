@@ -36,7 +36,7 @@ public class ReportController extends AbstractController {
 		List<Expenses> expenses = expensesDao.findByUserUid(userUid);
 		
 		//calculates the total expenses
-		double totalExpenses = 0;
+		double totalExpenses = 0.00;
 		Expenses temp;
 		
 		for(int i = 0; i < expenses.size(); i++){
@@ -63,11 +63,11 @@ public class ReportController extends AbstractController {
 		List <Expenses> expenses = expensesDao.findByUserUid(userUid);
 		
 		//pull each expense and total up by expenseType:  equipment, meals, fees, travel, mileage
-		double equipmentTotal = 0;
-		double mealsTotal = 0;
-		double feesTotal = 0;
-		double travelTotal = 0;
-		double mileageTotal = 0;
+		double equipmentTotal = 0.00;
+		double mealsTotal = 0.00;
+		double feesTotal = 0.00;
+		double travelTotal = 0.00;
+		double mileageTotal = 0.00;
 		
 		int expensesSize = expenses.size();
 		
@@ -97,12 +97,12 @@ public class ReportController extends AbstractController {
 			}
 		}
 		
-		//format to 2 decimals
-		equipmentTotal = Math.round(equipmentTotal * 100) / 100.00;
-		mealsTotal = Math.round(mealsTotal * 100) / 100.00;
-		feesTotal = Math.round(feesTotal * 100) / 100.00;
-		travelTotal = Math.round(travelTotal * 100) / 100.00;
-		mileageTotal = Math.round(mileageTotal * 100) / 100.00;
+		//format to 2 decimals...why not working??????
+		equipmentTotal = Math.round(equipmentTotal * 100.0) / 100.0;
+		mealsTotal = Math.round(mealsTotal * 100.0) / 100.0;
+		feesTotal = Math.round(feesTotal * 100.0) / 100.0;
+		travelTotal = Math.round(travelTotal * 100.0) / 100.0;
+		mileageTotal = Math.round(mileageTotal * 100.0) / 100.0;
 		
 		model.addAttribute("equipmentTotal", equipmentTotal);
 		model.addAttribute("mealsTotal", mealsTotal);
@@ -114,15 +114,123 @@ public class ReportController extends AbstractController {
 			
 			
 		}
+	
+	@RequestMapping(value="/bymonth", method=RequestMethod.GET)
+	public String byMonth(HttpServletRequest request, Model model){
 		
-	
-	
-	
-	//method to pull in logged in user
-	public User userInSession(HttpServletRequest request){
+		//pull in logged in user
 		User userInSession = getUserFromSession(request.getSession());
-		return userInSession;
+		int userUid = userInSession.getUid();
+				
+		//pull in logged users expenses
+		List <Expenses> expenses = expensesDao.findByUserUid(userUid);
+		
+		Expenses temp;
+		
+		double janTotal = 0.00;
+		double febTotal = 0.00;
+		double marTotal = 0.00;
+		double aprTotal = 0.00;
+		double mayTotal = 0.00;
+		double junTotal = 0.00;
+		double julTotal = 0.00;
+		double augTotal = 0.00;
+		double sepTotal = 0.00;
+		double octTotal = 0.00;
+		double novTotal = 0.00;
+		double decTotal = 0.00;
+		
+		for(int i = 0; i < expenses.size(); i++){
+			temp = expenses.get(i);
+			String date = temp.getDate();
+			
+			int dateMonth = month(date);
+			
+			if(dateMonth == 1){
+				janTotal = janTotal + temp.getAmount();
+			}
+			
+			if(dateMonth == 2){
+				febTotal = febTotal + temp.getAmount();
+			}
+			
+			if(dateMonth == 3){
+				marTotal = marTotal + temp.getAmount();
+			}
+			
+			if(dateMonth == 4){
+				aprTotal = aprTotal + temp.getAmount();
+			}
+			
+			if(dateMonth == 5){
+				mayTotal = mayTotal + temp.getAmount();
+			}
+			
+			if(dateMonth == 6){
+				junTotal = junTotal + temp.getAmount();
+			}
+			
+			if(dateMonth == 7){
+				julTotal = julTotal + temp.getAmount();
+			}
+			
+			if(dateMonth == 8){
+				augTotal = augTotal + temp.getAmount();
+			}
+			
+			if(dateMonth == 9){
+				sepTotal = sepTotal + temp.getAmount();
+			}
+			
+			if(dateMonth == 10){
+				octTotal = octTotal + temp.getAmount();
+			}
+			
+			if(dateMonth == 11){
+				novTotal = novTotal + temp.getAmount();
+			}
+			
+			if(dateMonth == 12){
+				decTotal = decTotal + temp.getAmount();
+			}
+		}
+		
+		model.addAttribute("janTotal", janTotal);
+		model.addAttribute("febTotal", febTotal);
+		model.addAttribute("marTotal", marTotal);
+		model.addAttribute("aprTotal", aprTotal);
+		model.addAttribute("mayTotal", mayTotal);
+		model.addAttribute("junTotal", junTotal);
+		model.addAttribute("julTotal", julTotal);
+		model.addAttribute("augTotal", augTotal);
+		model.addAttribute("sepTotal", sepTotal);
+		model.addAttribute("octTotal", octTotal);
+		model.addAttribute("novTotal", novTotal);
+		model.addAttribute("decTotal", decTotal);
+		
+		return "/bymonth";
 	}
+	
+	//method to determine which month expense is in
+	public int month(String date){
+		String match = "/";
+		int index = date.indexOf(match);
+		int month = 0;
+		
+		//index == 1 means month is only 1 digit, use the character at index 0
+		if(index == 1){
+			month = Character.getNumericValue(date.charAt(index - 1));
+		}
+		
+		//index == 2, then the month is 2 digits.  month will be 10, 11 or 12.  so, get digit at index 1 and add 10
+		if(index == 2){
+			month = (Character.getNumericValue(date.charAt(index - 1))) + 10;
+		}
+		return month;
+	}
+	
+	
+	
 	
 
 }

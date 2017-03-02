@@ -51,7 +51,7 @@ public class ExpensesController extends AbstractController{
 		double mileage = Double.parseDouble(miles);
 		//set defaults so expense can be added to db
 		String expenseType = "mileage";
-		double amount = 0.0;
+		double amount = 0.00;
 		String vendor = "self";
 		boolean haveReceipt = false;
 		
