@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.launchcode.refExpenses.controllers.ReportController;
 import org.launchcode.refExpenses.models.Expenses;
 import org.launchcode.refExpenses.models.dao.ExpensesDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,6 +127,20 @@ public class RefExpensesReportingTests extends TestCase {
 		}
 		travelTotal = Math.round(travelTotal * 100.0) / 100.0;
 		assertEquals(120.00, travelTotal);
+		
+		
+	}
+	
+	@Test
+	public void testMonth(){
+		//list of all expenses for user with ID 2
+		
+		//create list expenses for user with id 2 
+		List<Expenses> testExpenses = expensesDao.findByUserUid(2);
+		Expenses temp;
+		
+		assertEquals(1, ReportController.month("1/1/17"));
+		assertEquals(12, ReportController.month("12/1/17"));
 		
 		
 	}
